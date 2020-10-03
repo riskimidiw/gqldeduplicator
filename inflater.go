@@ -5,29 +5,29 @@ import (
 	"fmt"
 )
 
-// Deflate similar object in graphql response.
+// Inflate similar object in graphql response.
 // Use deep first search (DFS) algorithm to walk over nodes and memoize object.
-// If object appeared or memoized before, then it will deflated.
-func Deflate(data []byte) ([]byte, error) {
+// If object appeared or memoized before, then it will inflated.
+func Inflate(data []byte) ([]byte, error) {
 	var node interface{}
 	err := json.Unmarshal(data, &node)
 	if err != nil {
 		return nil, err
 	}
 
-	memoize := make(map[string]bool)
-	result := deflate(node, memoize, "data")
+	memoize := make(map[string]interface{})
+	result := inflate(node, memoize, "data")
 
 	return json.Marshal(result)
 }
 
-func deflate(node interface{}, memoize map[string]bool, path string) interface{} {
+func inflate(node interface{}, memoize map[string]interface{}, path string) interface{} {
 	switch value := node.(type) {
 	case []interface{}:
 		for i, v := range value {
 			switch v.(type) {
 			case []interface{}, map[string]interface{}:
-				value[i] = deflate(v, memoize, path)
+				value[i] = inflate(v, memoize, path)
 			default:
 				value[i] = v
 			}
@@ -36,20 +36,17 @@ func deflate(node interface{}, memoize map[string]bool, path string) interface{}
 	case map[string]interface{}:
 		if value != nil && value["id"] != nil && value["__typename"] != nil {
 			key := fmt.Sprintf("%s,%v,%v", path, value["__typename"], value["id"])
-			if memoize[key] {
-				return map[string]interface{}{
-					"id":         value["id"],
-					"__typename": value["__typename"],
-				}
+			if memoize[key] != nil {
+				return memoize[key]
 			}
 
-			memoize[key] = true
+			memoize[key] = value
 		}
 
 		for k, v := range value {
 			switch v.(type) {
 			case []interface{}, map[string]interface{}:
-				value[k] = deflate(v, memoize, path+","+k)
+				value[k] = inflate(v, memoize, path+","+k)
 			default:
 				value[k] = v
 			}
