@@ -1,6 +1,6 @@
 # Graphql Deduplicator
-[![godoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat)](https://pkg.go.dev/github.com/riskimidiw/graphql-deduplicator) 
-[![go report](https://goreportcard.com/badge/github.com/riskimidiw/graphql-deduplicator)](https://goreportcard.com/report/github.com/riskimidiw/graphql-deduplicator)
+[![godoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat)](https://pkg.go.dev/github.com/riskimidiw/gqldeduplicator) 
+[![go report](https://goreportcard.com/badge/github.com/riskimidiw/gqldeduplicator)](https://goreportcard.com/report/github.com/riskimidiw/gqldeduplicator)
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/riskimidiw/graphql-deduplicator/blob/master/LICENSE)
 
 GraphQL response deduplicator.
@@ -15,7 +15,7 @@ package main
 import (
 	"log"
 
-	deduplicator "github.com/riskimidiw/graphql-deduplicator"
+	"github.com/riskimidiw/gqldeduplicator"
 )
 
 func main() {
@@ -35,13 +35,13 @@ func main() {
         ]
     }`)
 
-    deflate, err := deduplicator.Deflate(data)
+    deflate, err := gqldeduplicator.Deflate(data)
     if err != nil {
         log.Fatal(err)
     }
     log.Println("deflate:", string(deflate))
 
-    inflate, err := deduplicator.Inflate(deflate)
+    inflate, err := gqldeduplicator.Inflate(deflate)
     if err != nil {
         log.Fatal(err)
     }

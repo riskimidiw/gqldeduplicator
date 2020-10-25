@@ -1,4 +1,4 @@
-package deduplicator
+package gqldeduplicator
 
 import (
 	"encoding/json"
@@ -16,7 +16,7 @@ func Deflate(data []byte) ([]byte, error) {
 	}
 
 	memoize := make(map[string]bool)
-	result := deflate(node, memoize, "data")
+	result := deflate(node, memoize, "root")
 
 	return json.Marshal(result)
 }

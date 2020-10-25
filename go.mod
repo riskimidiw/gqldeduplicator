@@ -1,4 +1,4 @@
-module github.com/riskimidiw/graphql-deduplicator
+module github.com/riskimidiw/gqldeduplicator
 
 go 1.14
 

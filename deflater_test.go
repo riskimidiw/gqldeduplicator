@@ -1,4 +1,4 @@
-package deduplicator
+package gqldeduplicator
 
 import (
 	"testing"
