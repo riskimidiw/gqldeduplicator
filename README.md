@@ -1,6 +1,7 @@
 # Graphql Deduplicator
-[![godoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat)](https://pkg.go.dev/github.com/riskimidiw/gqldeduplicator) 
+[![codecov](https://codecov.io/gh/riskimidiw/gqldeduplicator/branch/master/graph/badge.svg?token=88EER75FNE)](https://codecov.io/gh/riskimidiw/gqldeduplicator)
 [![go report](https://goreportcard.com/badge/github.com/riskimidiw/gqldeduplicator)](https://goreportcard.com/report/github.com/riskimidiw/gqldeduplicator)
+[![godoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat)](https://pkg.go.dev/github.com/riskimidiw/gqldeduplicator) 
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/riskimidiw/graphql-deduplicator/blob/master/LICENSE)
 
 GraphQL response deduplicator.

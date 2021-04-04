@@ -6,6 +6,9 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,5 +39,9 @@ jobs:
           args: --exclude-use-default=false --enable=golint --enable=goimports --enable=unconvert --enable=unparam --enable=gosec
 
       # Run testing on the code
-      - name: Run testing
-        run: make test
+      - name: Run test coverage
+        run: go test -race -coverprofile=coverage.txt -covermode=atomic
+      
+      # Upload to Codecov
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
